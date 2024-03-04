@@ -8,7 +8,14 @@ Please note: The agent has only been tested on Node-RED v3.1.6.
 
 ### Install the Subflow
 
-There are two ways to install the `ays-agent` subflow.
+There are three ways to install the `ays-agent` subflow.
+
+**1. Node-RED**
+
+- Open Node-RED
+- Top right menu button > `Settings` > `Palette`
+- Search for `ays-agent`
+- Install
 
 **1. Import subflow.json file**
 
