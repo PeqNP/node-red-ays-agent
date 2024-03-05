@@ -8,6 +8,7 @@
             child: {value: ""},
             monitor: {value: ""},
             threshold: {value: ""},
+            heartbeat: {value: "300"},
             template: {value: ""}
         },
         inputs: 1,
@@ -39,12 +40,16 @@
         <input type="text" id="node-input-monitor" placeholder="Monitor name (Default: node-red)">
     </div>
     <div class="form-row">
+        <label for="node-input-heartbeat">Heartbeat</label>
+        <input type="text" id="node-input-heartbeat" placeholder="Alert if timeout (in seconds) is exceeded. Leave empty to ignore.">
+    </div>
+    <div class="form-row">
         <label for="node-input-threshold"><i class="fa fa-thermometer-half"></i> Threshold</label>
         <input type="text" id="node-input-threshold" placeholder="e.g. >30:critical">
     </div>
     <div class="form-row">
-        <label for="node-input-threshold"><i class="fa fa-copy"></i> Template</label>
-        <input type="text" id="node-input-threshold" placeholder="Template node path to adopt">
+        <label for="node-input-template"><i class="fa fa-copy"></i> Template</label>
+        <input type="text" id="node-input-template" placeholder="Template node path to adopt">
     </div>
 </script>
 
