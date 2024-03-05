@@ -1,6 +1,6 @@
 {
   "name": "@bithead/node-red-ays-agent",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Send sample values from HW/SW agents to the At Your Service Agent Service.",
   "keywords": [
     "node-red",

@@ -8,7 +8,7 @@ Please note: The agent has only been tested on Node-RED v3.1.6.
 
 ### Install the Subflow
 
-There are three ways to install the `ays-agent` subflow.
+There are two ways to install the `ays-agent` subflow.
 
 **1. Node-RED**
 
@@ -17,55 +17,30 @@ There are three ways to install the `ays-agent` subflow.
 - Search for the `bithead/node-red-ays-agent` module
 - Install
 
-**2. Import subflow.json file**
+**2. NPM**
 
-- Clone the `https://github.com/PeqNP/node-red-ays-agent` repository
-- Open Node-RED
-- Tap the menu button on the top right > `Import` > `select a file to import`
-- Select the `/path/to/node-red-ays-agent/node-red/subflow-node-red.json` file and import
-
-**3. Import JSON structure**
-
-You may also copy the [subflow JSON structure](https://github.com/PeqNP/node-red-ays-agent/blob/main/subflow-node-red.json) directly.
-
-- Copy the raw contents, of the [subflow JSON structure](https://github.com/PeqNP/node-red-ays-agent/blob/main/subflow-node-red.json)
-- Open Node-RED
-- Tap the menu button on the top right > `Import`
-- Paste the contents into the `Clipboard`'s text area box
-- Tap `Import`
-
-### Add Environment Variables
-
-Tap the menu button on the top right > `Settings` > `Environment`. Add these environment variables:
-
-- `AYS_SERVER` with the value `https://api.bithead.io:9443/agent/`. If necessary, please change this to the location of your local instance.
-- `AYS_ORG_SECRET` with the value of your respective Organization's secret.
-  - To find your org secret, navigate to the top-most org node in your System Graph
-  - Tap the `Edit` mode
-  - Tap your organization node in the System Graph
-  - Once the form appears, tap the `Organization configuration`
-  - Tap the "Copy" icon in the `Secret` row
-  - Paste this value into your `AYS_ORG_SECRET` environment variable value inside Node-RED
+- Open a terminal
+- Change directory to the Node-RED config directory (e.g. `cd ~/.node-red`)
+- Install module using NPM `npm install @bithead/node-red-ays-agent`
 
 ## Usage
 
-Drag the `ays-agent` subflow into your flow. It should be located in the `network` category.
+Drag the `ays-agent` node into your flow. It should be located in the `network` category.
 
 Connect any of your HW/SW systems to the `ays-agent` input. The input must be a numeric value.
 
-**Required Parameters:**
+**Parameters:**
 
-- `Server` Unless you need a different server, leave this as `AYS_SERVER`, or update the environment variable.
-- `Org Secret`. If you are sending messages to multiple orgs (uncommon),  leave this as `AYS_ORG_SECRET`, or update the environment variable.
-- `Parent Node` This is the parent node your child will live under.
+- `Config` global configuration that can be used by an `ays-agent` node instance
+  - `Server` the location to the AYS Agent Service endpoint
+  - `Org Secret` the respective secret for the organization node sending samples to
+  - `Parent` (optional) the path to the parent node. Set this value if you intend to use the same parent for all agents.
+- `Parent Node` the path to the parent node. Your child lives under this node. Leave this empty to use the `Config.Parent Node` value. Otherwise, it will override the value.
 - `Child Node` The name of the child node. Please use the character range `[a-z0-9]`, or the hyphen (`-`) character, where the first character in the name is a letter. e.g. `my-node-01`
-
-**Optional Parameters:**
-
-- `Monitor Name` The name of the monitor. If none is provided, `node-red` is used.
-- `Threshold` Trigger a threshold if a value falls outside of specified range. Refer to the [ays-agent API docs](https://github.com/PeqNP/ays-agent/blob/main/docs/api.md#--value-threshold-optional) for a list of supported threshold formats.
-- `Heartbeat` The default is set for 5 minutes. If you don't want to monitor the node, set the heartbeat value to `0`.
-- `Template` Adopt a template located at the specified node path.
+- `Monitor Name` (optional) The name of the monitor. If none is provided, `node-red` is used.
+- `Threshold` (optional) Trigger a threshold if a value falls outside of specified range. Refer to the [ays-agent API docs](https://github.com/PeqNP/ays-agent/blob/main/docs/api.md#--value-threshold-optional) for a list of supported threshold formats.
+- `Heartbeat` (optional) The default is set for 5 minutes. If you don't want to monitor the node, set the heartbeat value to `0`.
+- `Template` (optional) Adopt a template located at the specified node path.
 
 ## Debugging
 
