@@ -19,10 +19,7 @@
     "node": ">=14.0.0"
   },
   "homepage": "https://ays.bithead.io",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/PeqNP/node-red-ays-agent.git"
-  },
   "author": "Eric Chamberlain <bitheadrl@protonmail.com>",
+  "repository": "github:PeqNP/node-red-ays-agent",
   "license": "MIT"
 }
