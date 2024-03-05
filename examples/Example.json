@@ -1,0 +1,60 @@
+[
+    {
+        "id": "ea58911a7e2fa133",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "eead9fe4fae451a6",
+        "type": "inject",
+        "z": "ea58911a7e2fa133",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "122",
+        "payloadType": "num",
+        "x": 270,
+        "y": 380,
+        "wires": [
+            [
+                "2958d2c72f732570"
+            ]
+        ]
+    },
+    {
+        "id": "2958d2c72f732570",
+        "type": "ays-agent",
+        "z": "ea58911a7e2fa133",
+        "config": "f3083373269e1cd3",
+        "parent": "",
+        "child": "water-heater",
+        "monitor": "Temp",
+        "threshold": "120-140:critical",
+        "template": "",
+        "x": 460,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "f3083373269e1cd3",
+        "type": "ays-agent-config",
+        "server": "https://api.bithead.io:9443/agent/",
+        "secret": "nwgf9dx",
+        "parent": "com.example.home"
+    }
+]
