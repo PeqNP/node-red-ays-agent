@@ -106,7 +106,7 @@
         ],
         "meta": {
             "module": "ays-agent",
-            "version": "1.0.0",
+            "version": "1.0.2",
             "author": "Eric Chamberlain",
             "desc": "Send sample values from HW/SW systems to the At Your Service agent.",
             "keywords": "node-red,ays-agent",
