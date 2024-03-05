@@ -7,18 +7,18 @@
     "ays-agent"
   ],
   "node-red": {
-      "version": ">=3.0.0",
-      "nodes": {
-          "agent": "ays-agent.js"
-      }
+    "version": ">=3.0.0",
+    "nodes": {
+      "agent": "ays-agent.js"
+    }
   },
   "engines": {
-      "node": ">=14.0.0"
+    "node": ">=14.0.0"
   },
   "homepage": "https://ays.bithead.io",
   "repository": {
     "type": "git",
-    "url": "https://github.com/PeqNP/node-red-ays-agent"
+    "url": "git+https://github.com/PeqNP/node-red-ays-agent.git"
   },
   "author": "Eric Chamberlain <bitheadrl@protonmail.com>",
   "license": "MIT"
