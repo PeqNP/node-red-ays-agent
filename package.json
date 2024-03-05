@@ -2,10 +2,6 @@
   "name": "@bithead/node-red-ays-agent",
   "version": "1.0.2",
   "description": "Send sample values from HW/SW systems to the At Your Service agent.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
     "node-red",
     "ays-agent"
@@ -13,7 +9,7 @@
   "node-red": {
       "version": ">=3.0.0",
       "nodes": {
-          "ays-agent": "src/ays-agent.js"
+          "agent": "ays-agent.js"
       }
   },
   "engines": {
