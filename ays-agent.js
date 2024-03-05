@@ -1,57 +1,61 @@
+/**
+ Copyright 2024 Bithead LLC. All rights reserved.
+
+ MIT License
+ */
+
 module.exports = function(RED) {
     function AYSAgentNode(config) {
-        RED.nodes.createNode(this,config);
+        RED.nodes.createNode(this, config);
         var node = this;
-        node.on('input', function(msg) {
-            var http = require('http');
 
-            var server = env.get("AYS_SERVER").trim();
-            var org_secret = env.get("AYS_ORG_SECRET").trim();
-            var parent_node = env.get("AYS_PARENT").trim();
-            var child_node = env.get("AYS_CHILD").trim();
-            var monitor_name = env.get("AYS_MONITOR_NAME").trim();
-            var threshold = env.get("AYS_MONITOR_THRESHOLD").trim();
-            var heartbeat = env.get("AYS_HEARTBEAT");
-            var template = env.get("AYS_TEMPLATE").trim();
+        var cfg = RED.nodes.getNode(config.config);
+        var server = cfg.server;
+        var orgSecret = cfg.secret;
+        var parentNode = config.parent || cfg.parent;
+        var childNode = config.child;
+        var monitorName = config.monitor;
+        var threshold = config.threshold;
+        var heartbeat = parseInt(config.heartbeat) || 0;
+        var template = config.template;
+
+        node.on('input', function(msg, send, done) {
+            const axios = require('axios');
 
             // Set the "error" status of the node
-            function set_error(msg, text) {
-                var status = ({fill: "red", shape: "ring", text: text});
-                msg.payload = status;
-                return msg;
+            function setError(text) {
+                node.error(text);
+                node.status({fill: "red", shape: "ring", text: text});
+                node.send(null);
+                done();
             }
 
             if (server.length == 0) {
-                node.error("A global AYS_SERVER variable must be configured");
-                return set_error(msg, "AYS_SERVER required");
+                return setError("Server is required");
             }
-            if (org_secret.length == 0) {
-                node.error("A global AYS_ORG_SECRET must be configured");
-                // TODO: Display an error under the node
-                return set_error(msg, "AYS_ORG_SECRET required");
+            if (orgSecret.length == 0) {
+                return setError("Org secret is required");
             }
-            if (parent_node.length == 0) {
-                node.error("A parent node must be provided");
-                return set_error(msg, "Parent Node is required");
+            if (parentNode.length == 0) {
+                return setError("Parent node is required");
             }
-            if (child_node.length == 0) {
-                node.error("A child node, or child relative path, must be provided");
-                return set_error(msg, "Child Node is required");
+            if (childNode.length == 0) {
+                return setError("Child node is required");
             }
-            if (monitor_name.length == 0) {
-                monitor_name = "node-red";
+            if (monitorName.length == 0) {
+                monitorName = "node-red";
             }
 
             var payload = {
-                org_secret: org_secret, // "zki8y1v"
+                org_secret: orgSecret,
                 parent: {
                     property: "path",
-                    value: parent_node
+                    value: parentNode
                 },
                 relationship: {
                     type: "child",
-                    monitor_name: monitor_name,
-                    path: child_node
+                    monitor_name: monitorName,
+                    path: childNode
                 },
                 value: {
                     name: "value",
@@ -75,25 +79,33 @@ module.exports = function(RED) {
                 }
             }
 
-            http.post(
-                {
-                    url: "http://localhost:9443/agent/",
-                    form: payload,
-                    headers: {
-                        "Content-Type: application/json",
-                    }
-                },
-                function (err, response, body) {
-                    if err != null {
-                        node.error(err)
-                    }
-                    else {
-                        node.log(body)
-                    }
-                }
-            )
+            headers = {
+                "Content-Type": "application/json"
+            };
 
-            node.send(msg);
+            axios.post(server, payload, {headers: headers})
+                .then(function (response) {
+                    node.status({fill: "green", shape: "dot"});
+                })
+                .catch(function (error) {
+                    node.error(error)
+                    try {
+                        var err_msg = error.response.data.error.message;
+                        node.status({fill: "red", shape: "ring", text: err_msg});
+                    } catch (err) {
+                        console.log(JSON.stringify(error, null, 4));
+                        if (error.code == "ECONNREFUSED") {
+                            node.status({fill: "red", shape: "ring", text: "Connection refused to " + server});
+                        }
+                        else {
+                            node.status({fill: "red", shape: "ring", text: error});
+                        }
+                    }
+                })
+                .finally(function() {
+                    node.send(msg);
+                    done();
+                });
         });
     }
     RED.nodes.registerType("ays-agent", AYSAgentNode);

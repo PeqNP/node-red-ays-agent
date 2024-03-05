@@ -3,13 +3,12 @@
         category: "network",
         color: "#e7e7ae",
         defaults: {
-            server: {value: "", type: "ays-agent-config"},
-            secret: {value: "", type: "ays-agent-config"},
-            name: {value: ""},
-            parentNode: {value: ""},
-            childNode: {value: ""},
-            monitorName: {value: "node-red"}
-            threshold: {value: ""}
+            config: {value: "", type: "ays-agent-config"},
+            parent: {value: ""},
+            child: {value: ""},
+            monitor: {value: ""},
+            threshold: {value: ""},
+            template: {value: ""}
         },
         inputs: 1,
         outputs: 0,
@@ -24,19 +23,31 @@
 
 <script type="text/html" data-template-name="ays-agent">
     <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> (Child) Name</label>
-        <input type="text" id="node-input-parent_node" placeholder="Parent node path">
-        <label for="node-input-parent-node"><i class="fa fa-tag"></i> Parent Node</label>
-        <input type="text" id="node-input-parent_node" placeholder="Parent node path">
-        <label for="node-input-child-node"><i class="fa fa-tag"></i> Child Node</label>
-        <input type="text" id="node-input-child-node" placeholder="Child node name or relative path">
-        <label for="node-input-monitor-name"><i class="fa fa-tag"></i> Monitor Name</label>
-        <input type="text" id="node-input-monitor-name" placeholder="Monitor name">
-        <label for="node-input-threshold"><i class="fa fa-tag"></i> Threshold</label>
-        <input type="text" id="node-input-threshold" placeholder="Threshold">
+        <label for="node-input-config">Config</label>
+        <input type="text" id="node-input-config">
+    </div>
+    <div class="form-row">
+        <label for="node-input-parent">Parent Node</label>
+        <input type="text" id="node-input-parent" placeholder="Leave empty to use Config">
+    </div>
+    <div class="form-row">
+        <label for="node-input-child">Child Node</label>
+        <input type="text" id="node-input-child" placeholder="Child node name or relative path">
+    </div>
+    <div class="form-row">
+        <label for="node-input-monitor">Monitor Name</label>
+        <input type="text" id="node-input-monitor" placeholder="Monitor name (Default: node-red)">
+    </div>
+    <div class="form-row">
+        <label for="node-input-threshold"><i class="fa fa-thermometer-half"></i> Threshold</label>
+        <input type="text" id="node-input-threshold" placeholder="e.g. >30:critical">
+    </div>
+    <div class="form-row">
+        <label for="node-input-threshold"><i class="fa fa-copy"></i> Template</label>
+        <input type="text" id="node-input-threshold" placeholder="Template node path to adopt">
     </div>
 </script>
 
 <script type="text/html" data-help-name="ays-agent">
-    <p>Send sample value from HW/SW systems to the At Your Service agent</p>
+    <p>Send sample values from HW/SW agents to the At Your Service Agent Service.</p>
 </script>
