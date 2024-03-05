@@ -1,6 +1,6 @@
 {
-  "name": "ays-agent",
-  "version": "1.0.0",
+  "name": "@bithead/node-red-ays-agent",
+  "version": "1.0.1",
   "description": "Send sample values from HW/SW systems to the At Your Service agent.",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,13 @@
           "ays-agent": "ays-agent.js"
       }
   },
-  "author": "Eric Chamberlain",
+  "engines": {
+      "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PeqNP/node-red-ays-agent"
+  },
+  "author": "Eric Chamberlain <bitheadrl@protonmail.com>",
   "license": "MIT"
 }

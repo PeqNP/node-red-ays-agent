@@ -13,18 +13,18 @@ There are three ways to install the `ays-agent` subflow.
 **1. Node-RED**
 
 - Open Node-RED
-- Top right menu button > `Settings` > `Palette`
-- Search for `ays-agent`
+- Top right menu button > `Settings` > `Palette` > (tab) `Install`
+- Search for the `ays-agent` module
 - Install
 
-**1. Import subflow.json file**
+**2. Import subflow.json file**
 
 - Clone the `ays-agent` repository
 - Open Node-RED
 - Tap the menu button on the top right > `Import` > `select a file to import`
 - Select the `/path/to/ays-agent/node-red/subflow.json` file and import
 
-**2. Import JSON structure**
+**3. Import JSON structure**
 
 You may also copy the [subflow JSON structure](https://github.com/PeqNP/ays-agent/blob/main/node-red/subflow.json) directly.
 
