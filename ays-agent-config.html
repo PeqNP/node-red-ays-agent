@@ -1,0 +1,24 @@
+<script type="text/javascript">
+    RED.nodes.registerType("ays-agent-config", {
+        category: "config",
+        defaults: {
+            server: {value: "http://api.bithead.io:9443/agent/", required: true},
+            secret: {value: "", required: true},
+            parentNode: {value: "", required: false},
+        },
+        label: function() {
+            return this.endpoint;
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="ays-agent-config">
+    <div class="form-row">
+        <label for="node-config-input-server"><i class="fa fa-bookmark"></i> Server</label>
+        <input type="text" id="node-config-input-server">
+        <label for="node-config-input-secret"><i class="fa fa-bookmark"></i> Org Secret</label>
+        <input type="text" id="node-config-input-secret">
+        <label for="node-config-input-parent-node"><i class="fa fa-bookmark"></i> Parent Node</label>
+        <input type="text" id="node-config-input-parent-node">
+    </div>
+</script>

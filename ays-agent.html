@@ -1,0 +1,42 @@
+<script type="text/javascript">
+    RED.nodes.registerType("ays-agent", {
+        category: "network",
+        color: "#e7e7ae",
+        defaults: {
+            server: {value: "", type: "ays-agent-config"},
+            secret: {value: "", type: "ays-agent-config"},
+            name: {value: ""},
+            parentNode: {value: ""},
+            childNode: {value: ""},
+            monitorName: {value: "node-red"}
+            threshold: {value: ""}
+        },
+        inputs: 1,
+        outputs: 0,
+        icon: "bridge.svg",
+        align: "right",
+        inputLabels: "sample value",
+        label: function() {
+            return this.name||"ays-agent";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="ays-agent">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> (Child) Name</label>
+        <input type="text" id="node-input-parent_node" placeholder="Parent node path">
+        <label for="node-input-parent-node"><i class="fa fa-tag"></i> Parent Node</label>
+        <input type="text" id="node-input-parent_node" placeholder="Parent node path">
+        <label for="node-input-child-node"><i class="fa fa-tag"></i> Child Node</label>
+        <input type="text" id="node-input-child-node" placeholder="Child node name or relative path">
+        <label for="node-input-monitor-name"><i class="fa fa-tag"></i> Monitor Name</label>
+        <input type="text" id="node-input-monitor-name" placeholder="Monitor name">
+        <label for="node-input-threshold"><i class="fa fa-tag"></i> Threshold</label>
+        <input type="text" id="node-input-threshold" placeholder="Threshold">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="ays-agent">
+    <p>Send sample value from HW/SW systems to the At Your Service agent</p>
+</script>
